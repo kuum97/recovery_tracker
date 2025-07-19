@@ -1,4 +1,4 @@
-import RecordInput from "./RecordInput";
+import RecordInput from "@/components/RecordInput";
 
 export default function Home() {
   return (
