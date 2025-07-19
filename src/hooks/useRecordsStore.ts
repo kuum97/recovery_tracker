@@ -1,13 +1,5 @@
+import { UserRecord } from "@/types";
 import { create } from "zustand";
-
-interface UserRecord {
-  id: string;
-  createdAt: string;
-  text: string;
-  emotion?: string | null;
-  action?: string | null;
-  isRecoveryPoint?: boolean;
-}
 
 type RecordState = {
   records: UserRecord[];

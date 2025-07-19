@@ -1,20 +1,37 @@
 "use client";
 
+import useRecordsStore from "@/hooks/useRecordsStore";
+import { UserRecord } from "@/types";
+import { useEffect } from "react";
+
 const RecordInput = () => {
-  // store의 상태와 액션 연결 => 아웃풋 구현단계와의 순서 고려
+  const { addRecord, records } = useRecordsStore();
+
   // 쿼리 전송 기반 코드 작성
   async function submitRecord(formData: FormData) {
-    const query = formData.get("record-query");
+    const text = formData.get("record-text");
+    if (typeof text !== "string") return;
 
-    console.log(query);
+    // 추후 쿼리의 세부사항 필터링 작업 추가
+    const newRecord: UserRecord = {
+      id: Date.now().toString(),
+      createdAt: new Date().toString(),
+      text,
+    };
+
+    addRecord(newRecord);
   }
+
+  useEffect(() => {
+    console.log(records);
+  }, [records]);
 
   return (
     <form action={submitRecord}>
       <input
         id="record-input"
         type="string"
-        name="record-query"
+        name="record-text"
         required
         maxLength={100}
         className="border"
